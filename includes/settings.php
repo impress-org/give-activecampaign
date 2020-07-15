@@ -80,7 +80,7 @@ class Give_ActiveCampaign_Settings extends Give_Settings_Page {
 				'type' => 'checkbox',
 			),
 			array(
-				'id'      => 'give_activecampaign_checkout_default',
+				'id'      => 'give_activecampaign_checkbox_default',
 				'name'    => __( 'Opt-in Default', 'give-activecampaign' ),
 				'desc'    => __( 'Would you like the newsletter opt-in checkbox checked by default? This option can be customized per form.', 'give-activecampaign' ),
 				'options' => array(
