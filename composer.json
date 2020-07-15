@@ -1,0 +1,15 @@
+{
+  "name": "impress-org/give-activecampaign",
+  "authors": [
+    {
+      "name": "GiveWP",
+      "email": "support@givewp.com",
+      "homepage": "https://givewp.com",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "activecampaign/api-php": "2.0.3"
+  },
+  "minimum-stability": "dev"
+}
