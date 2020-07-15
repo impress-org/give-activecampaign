@@ -40,7 +40,7 @@ class Give_ActiveCampaign_Settings extends Give_Settings_Page {
 	function get_sections() {
 
 		$sections = array(
-			'activecampaign' => __( 'ActiveCampaign Settings', 'give-pdf-receipts' ),
+			'activecampaign' => __( 'ActiveCampaign Settings', 'give-activecampaign' ),
 		);
 
 		return $sections;

@@ -1,0 +1,121 @@
+# Copyright (C) 2020 Give-ActiveCampaign
+# This file is distributed under the same license as the Give-ActiveCampaign package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Give-ActiveCampaign\n"
+"Report-Msgid-Bugs-To: https://github.com/impress-org/give-activecampaign/issues/new\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2020-MO-DA HO:MI+ZONE\n"
+"Language-Team: GiveWP <info@givewp.com>\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: give-activecampaign.php:181
+msgid "<strong>Activation Error:</strong> You must have the <a href=\"%s\" target=\"_blank\">Give</a> plugin installed and activated for Give - ActiveCampaign to activate."
+msgstr ""
+
+#: give-activecampaign.php:210
+msgid "<strong>Activation Error:</strong> You must have the <a href=\"%1$s\" target=\"_blank\">Give</a> core version %2$s for the Give - ActiveCampaign add-on to activate."
+msgstr ""
+
+#: give-activecampaign.php:253, includes/settings.php:29
+msgid "ActiveCampaign"
+msgstr ""
+
+#: give-activecampaign.php:339
+msgid "This outputs whether the donor opted-in to the Newsletter"
+msgstr ""
+
+#: give-activecampaign.php:357
+msgid "Did not subscribe to newsletter"
+msgstr ""
+
+#: give-activecampaign.php:360
+msgid "Subscribed to newsletter"
+msgstr ""
+
+#: includes/activation.php:29
+msgid "Settings"
+msgstr ""
+
+#: includes/activation.php:64
+msgid "Documentation"
+msgstr ""
+
+#: includes/activation.php:74
+msgid "Add-ons"
+msgstr ""
+
+#: includes/settings.php:43, includes/settings.php:114
+msgid "ActiveCampaign Settings"
+msgstr ""
+
+#: includes/settings.php:66
+msgid "API URL"
+msgstr ""
+
+#: includes/settings.php:67
+msgid "Enter your ActiveCampaign API URL. It is located in the Settings > Developer area of your ActiveCampaign account."
+msgstr ""
+
+#: includes/settings.php:72
+msgid "API Key"
+msgstr ""
+
+#: includes/settings.php:73
+msgid "Enter your ActiveCampaign API Key. It is located in the Settings > Developer area of your ActiveCampaign account."
+msgstr ""
+
+#: includes/settings.php:78
+msgid "Enable Globally"
+msgstr ""
+
+#: includes/settings.php:79
+msgid "Allow donors to sign up for the list selected below on all donation forms? Note: the list(s) can be customized per form."
+msgstr ""
+
+#: includes/settings.php:84
+msgid "Opt-in Default"
+msgstr ""
+
+#: includes/settings.php:85
+msgid "Would you like the newsletter opt-in checkbox checked by default? This option can be customized per form."
+msgstr ""
+
+#: includes/settings.php:87
+msgid "Checked"
+msgstr ""
+
+#: includes/settings.php:88
+msgid "Unchecked"
+msgstr ""
+
+#: includes/settings.php:95
+msgid "Default List"
+msgstr ""
+
+#: includes/settings.php:96
+msgid "Select the list you wish for all donors to subscribe to by default. Note: the list(s) can be customized per form."
+msgstr ""
+
+#: includes/settings.php:102
+msgid "Default Label"
+msgstr ""
+
+#: includes/settings.php:103
+msgid "This is the text shown by default next to the ActiveCampaign sign up checkbox. Note: the text can be customized per form."
+msgstr ""
+
+#: includes/settings.php:107
+msgid "Subscribe to our newsletter"
+msgstr ""
+
+#: includes/settings.php:111
+msgid "ActiveCampaign Docs Link"
+msgstr ""
