@@ -92,6 +92,9 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 			add_action( 'admin_notices', array( $this, 'admin_notices' ), 15 );
 			add_action( 'give_add_email_tags', array( $this, 'add_email_tags' ), 9999999 );
 
+			add_action( 'give_complete_donation', array( $this, 'completed_donation_optin' ), 10, 1 );
+
+
 			add_filter( 'give-settings_get_settings_pages', array( $this, 'global_settings' ), 10, 1 );
 
 		}
@@ -324,6 +327,56 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 			$settings[] = require_once GIVE_ACTIVECAMPAIGN_PATH . '/includes/settings.php';
 
 			return $settings;
+		}
+
+		/**
+		 * Check if a donor needs to be subscribed on completed donation.
+		 *
+		 * @since  1.0.0
+		 * @access public
+		 *
+		 * @param $payment_id int
+		 * @param $payment_data array
+		 */
+		public function completed_donation_optin( $payment_id, $payment_data  ) {
+
+			// Get the Payment object
+//			$payment = give_get_donation( $payment_id );
+			$meta = $payment->get_meta( 'eddactivecampaign_activecampaign_signup', true );
+
+
+			$form_lists = give_get_meta( $payment_data['give_form_id'], '_give_activecampaign', true );
+
+			// Check if $form_lists is set if not use global list(s).
+			if ( empty( $form_lists ) ) {
+
+				// Get lists.
+				$lists = give_get_option( 'give_activecampaign_lists' );
+
+				// Not set so use global list.
+				$form_lists = ! is_array( $lists ) ? array( 0 => $lists ) : $lists;
+
+			}
+
+				if ( empty ( $lists ) ) {
+
+					// No Download list set so return global list ID
+					$list_id = give_get_option( 'eddactivecampaign_list', false );
+					if( ! $list_id ) {
+						return false;
+					}
+
+					$this->subscribe_email( $user_info['email'], $user_info['first_name'], $user_info['last_name'], $list_id );
+
+					return;
+
+				$lists = array_unique( $lists );
+
+				foreach ( $lists as $list ) {
+					$this->subscribe_email( $user_info['email'], $user_info['first_name'], $user_info['last_name'], $list );
+				}
+
+			}
 		}
 
 		/**
