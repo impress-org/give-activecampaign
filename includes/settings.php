@@ -90,7 +90,6 @@ class Give_ActiveCampaign_Settings extends Give_Settings_Page {
 				'default' => 'no',
 				'type'    => 'radio_inline',
 			),
-
 			array(
 				'id'      => 'give_activecampaign_tags',
 				'name'    => __( 'Assign Tags', 'give-activecampaign' ),
@@ -100,7 +99,7 @@ class Give_ActiveCampaign_Settings extends Give_Settings_Page {
 				'options' => give_get_activecampaign_tags(),
 			),
 			array(
-				'id'      => 'give_activecampaign_list',
+				'id'      => 'give_activecampaign_lists',
 				'name'    => __( 'Lists', 'give-activecampaign' ),
 				'desc'    => __( 'Select the list you wish for all donors to subscribe to by default. Note: the list(s) can be customized per form.', 'give-activecampaign' ),
 				'type'          => 'multiselect',

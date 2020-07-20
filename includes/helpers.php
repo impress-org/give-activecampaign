@@ -80,8 +80,9 @@ function give_get_activecampaign_tags() {
 
 			$output[ $tag['id'] ] = $tag['name'];
 		}
-		error_log( print_r( $output, true ) . "\n", 3, WP_CONTENT_DIR . '/debug_new.log' );
+
 		return $output;
+
 	} else {
 		return array();
 	}
@@ -109,7 +110,7 @@ function give_activecampaign_display_optin( $form_id ) {
 	ob_start(); ?>
 	<fieldset id="give_activecampaign_<?php echo $form_id; ?>" class="give-activecampaign-fieldset">
 		<label for="give_activecampaign_<?php echo $form_id; ?>_signup" class="give-activecampaign-optin-label">
-			<input name="give_activecampaign_<?php echo $form_id; ?>_signup"
+			<input name="give_activecampaign_signup"
 			       class="give-activecampaign-optin-input"
 			       id="give_activecampaign_<?php echo $form_id; ?>_signup"
 			       type="checkbox" <?php echo( $checked !== 'no' ? 'checked="checked"' : '' ); ?>/>
@@ -166,3 +167,26 @@ function give_activecampaign_subscribe_email( $email, $first_name = '', $last_na
 
 	return false;
 }
+
+
+/**
+ * Show Line item on donation details screen if the donor opted-in to the newsletter.
+ *
+ * @param $payment_id
+ */
+function give_activecampaign_donation_metabox_notification( $payment_id ) {
+
+	$opt_in_meta = give_get_meta( $payment_id, '_give_activecampaign_donation_optin_status', true );
+
+	if ( $opt_in_meta ) { ?>
+		<div class="give-admin-box-inside">
+			<p>
+				<span class="label"><?php _e( 'ActiveCampaign', 'give-activecampaign' ); ?>:</span>&nbsp;
+				<span><?php _e( 'Opted-in', 'give-activecampaign' ); ?></span>
+			</p>
+		</div>
+	<?php }
+
+}
+
+add_filter( 'give_view_donation_details_totals_after', 'give_activecampaign_donation_metabox_notification', 10, 1 );
