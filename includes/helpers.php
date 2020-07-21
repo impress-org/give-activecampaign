@@ -101,7 +101,7 @@ function give_activecampaign_display_optin( $form_id ) {
 	if ( ! empty( $label ) ) {
 		$checkout_label = trim( $label );
 	} else {
-		$checkout_label = __( 'Subscribe to our newsletter', 'edd-activecampaign' );
+		$checkout_label = __( 'Subscribe to our newsletter', 'give-activecampaign' );
 	}
 
 	// Should the opt-on be checked or unchecked by default?
@@ -156,10 +156,7 @@ add_filter( 'give_view_donation_details_totals_after', 'give_activecampaign_dona
  */
 function give_activecampaign_enqueue_admin_scripts() {
 	if ( give_is_admin_page() ) {
-		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-
-		wp_register_script( 'give-activecampaign-admin', GIVE_ACTIVECAMPAIGN_URL . 'assets/js/give-activecampaign-admin' . $suffix . '.js', array( 'give-admin-scripts' ),
-			GIVE_ACTIVECAMPAIGN_VERSION, false );
+		wp_register_script( 'give-activecampaign-admin', GIVE_ACTIVECAMPAIGN_URL . 'assets/js/give-activecampaign-admin.js', array( 'give-admin-scripts' ), GIVE_ACTIVECAMPAIGN_VERSION, false );
 		wp_enqueue_script( 'give-activecampaign-admin' );
 	}
 

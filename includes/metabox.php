@@ -11,20 +11,20 @@ function give_activecampaign_add_metabox_setting_fields( $settings, $post_id ) {
 
 	$settings['activecampaign_options'] = array(
 		'id'        => 'activecampaign_options',
-		'title'     => esc_html__( 'ActiveCampaign', 'give-razorpay' ),
+		'title'     => esc_html__( 'ActiveCampaign', 'give-activecampaign' ),
 		'icon-html' => '<i class="fas fa-envelope"></i>',
 		'fields'    => array(
 			array(
-				'name'    => esc_html__( 'Account Options', 'give-razorpay' ),
+				'name'    => esc_html__( 'Account Options', 'give-activecampaign' ),
 				'id'      => 'activecampaign_per_form_options',
 				'type'    => 'radio_inline',
 				'desc'    => esc_html__( 'This allows you to customize the ActiveCampaign settings for just this donation form. You can disable the opt-in for just this form as well or simply use the global settings.',
 					'give-activecampaign' ),
 				'default' => 'global',
 				'options' => array(
-					'global'   => esc_html__( 'Global Options', 'give-razorpay' ),
-					'enabled'  => esc_html__( 'Customize', 'give-razorpay' ),
-					'disabled' => esc_html__( 'Disable', 'give-razorpay' ),
+					'global'   => esc_html__( 'Global Options', 'give-activecampaign' ),
+					'enabled'  => esc_html__( 'Customize', 'give-activecampaign' ),
+					'disabled' => esc_html__( 'Disable', 'give-activecampaign' ),
 				),
 			),
 			array(

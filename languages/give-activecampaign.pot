@@ -16,27 +16,27 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: give-activecampaign.php:181
+#: give-activecampaign.php:185
 msgid "<strong>Activation Error:</strong> You must have the <a href=\"%s\" target=\"_blank\">Give</a> plugin installed and activated for Give - ActiveCampaign to activate."
 msgstr ""
 
-#: give-activecampaign.php:210
+#: give-activecampaign.php:214
 msgid "<strong>Activation Error:</strong> You must have the <a href=\"%1$s\" target=\"_blank\">Give</a> core version %2$s for the Give - ActiveCampaign add-on to activate."
 msgstr ""
 
-#: give-activecampaign.php:253, includes/settings.php:29
+#: give-activecampaign.php:257, includes/helpers.php:143, includes/metabox.php:14, includes/settings.php:29
 msgid "ActiveCampaign"
 msgstr ""
 
-#: give-activecampaign.php:339
+#: give-activecampaign.php:464
 msgid "This outputs whether the donor opted-in to the Newsletter"
 msgstr ""
 
-#: give-activecampaign.php:357
+#: give-activecampaign.php:482
 msgid "Did not subscribe to newsletter"
 msgstr ""
 
-#: give-activecampaign.php:360
+#: give-activecampaign.php:485
 msgid "Subscribed to newsletter"
 msgstr ""
 
@@ -52,70 +52,118 @@ msgstr ""
 msgid "Add-ons"
 msgstr ""
 
-#: includes/settings.php:43, includes/settings.php:114
-msgid "ActiveCampaign Settings"
-msgstr ""
-
-#: includes/settings.php:66
-msgid "API URL"
-msgstr ""
-
-#: includes/settings.php:67
-msgid "Enter your ActiveCampaign API URL. It is located in the Settings > Developer area of your ActiveCampaign account."
-msgstr ""
-
-#: includes/settings.php:72
-msgid "API Key"
-msgstr ""
-
-#: includes/settings.php:73
-msgid "Enter your ActiveCampaign API Key. It is located in the Settings > Developer area of your ActiveCampaign account."
-msgstr ""
-
-#: includes/settings.php:78
-msgid "Enable Globally"
-msgstr ""
-
-#: includes/settings.php:79
-msgid "Allow donors to sign up for the list selected below on all donation forms? Note: the list(s) can be customized per form."
-msgstr ""
-
-#: includes/settings.php:84
-msgid "Opt-in Default"
-msgstr ""
-
-#: includes/settings.php:85
-msgid "Would you like the newsletter opt-in checkbox checked by default? This option can be customized per form."
-msgstr ""
-
-#: includes/settings.php:87
-msgid "Checked"
-msgstr ""
-
-#: includes/settings.php:88
-msgid "Unchecked"
-msgstr ""
-
-#: includes/settings.php:95
-msgid "Default List"
-msgstr ""
-
-#: includes/settings.php:96
-msgid "Select the list you wish for all donors to subscribe to by default. Note: the list(s) can be customized per form."
-msgstr ""
-
-#: includes/settings.php:102
-msgid "Default Label"
-msgstr ""
-
-#: includes/settings.php:103
-msgid "This is the text shown by default next to the ActiveCampaign sign up checkbox. Note: the text can be customized per form."
-msgstr ""
-
-#: includes/settings.php:107
+#: includes/helpers.php:104, includes/metabox.php:69, includes/settings.php:119
 msgid "Subscribe to our newsletter"
 msgstr ""
 
-#: includes/settings.php:111
+#: includes/helpers.php:144
+msgid "Opted-in"
+msgstr ""
+
+#: includes/metabox.php:18
+msgid "Account Options"
+msgstr ""
+
+#: includes/metabox.php:21
+msgid "This allows you to customize the ActiveCampaign settings for just this donation form. You can disable the opt-in for just this form as well or simply use the global settings."
+msgstr ""
+
+#: includes/metabox.php:25
+msgid "Global Options"
+msgstr ""
+
+#: includes/metabox.php:26
+msgid "Customize"
+msgstr ""
+
+#: includes/metabox.php:27
+msgid "Disable"
+msgstr ""
+
+#: includes/metabox.php:32, includes/settings.php:86
+msgid "Opt-in Default"
+msgstr ""
+
+#: includes/metabox.php:33
+msgid "Would you like the newsletter opt-in checkbox checked by default? This will override the global opt-in default setting."
+msgstr ""
+
+#: includes/metabox.php:35, includes/settings.php:89
+msgid "Checked"
+msgstr ""
+
+#: includes/metabox.php:36, includes/settings.php:90
+msgid "Unchecked"
+msgstr ""
+
+#: includes/metabox.php:44, includes/settings.php:97
+msgid "Assign Tags"
+msgstr ""
+
+#: includes/metabox.php:45
+msgid "The selected tags will be applied to anyone who donates. This will override the global tags setting."
+msgstr ""
+
+#: includes/metabox.php:54, includes/settings.php:106
+msgid "Lists"
+msgstr ""
+
+#: includes/metabox.php:55
+msgid "Select the list you wish for all donors to subscribe to by default. This will override the global lists setting."
+msgstr ""
+
+#: includes/metabox.php:64, includes/settings.php:114
+msgid "Default Label"
+msgstr ""
+
+#: includes/metabox.php:65
+msgid "This is the text shown by default next to the ActiveCampaign sign up checkbox. This will override the global label setting."
+msgstr ""
+
+#: includes/metabox.php:74, includes/settings.php:123
 msgid "ActiveCampaign Docs Link"
+msgstr ""
+
+#: includes/metabox.php:77, includes/settings.php:44, includes/settings.php:126
+msgid "ActiveCampaign Settings"
+msgstr ""
+
+#: includes/settings.php:67
+msgid "API URL"
+msgstr ""
+
+#: includes/settings.php:68
+msgid "Enter your ActiveCampaign API URL. It is located in the Settings > Developer area of your ActiveCampaign account."
+msgstr ""
+
+#: includes/settings.php:73
+msgid "API Key"
+msgstr ""
+
+#: includes/settings.php:74
+msgid "Enter your ActiveCampaign API Key. It is located in the Settings > Developer area of your ActiveCampaign account."
+msgstr ""
+
+#: includes/settings.php:79
+msgid "Enable Globally"
+msgstr ""
+
+#: includes/settings.php:80
+msgid "Allow donors to sign up for the list selected below on all donation forms? Note: the list(s) can be customized per form."
+msgstr ""
+
+#: includes/settings.php:87
+msgid "Would you like the newsletter opt-in checkbox checked by default? This option can be customized per form."
+msgstr ""
+
+#: includes/settings.php:98
+msgid "The selected tags will be applied to anyone who donates. Note: the tag(s) can be customized per form."
+msgstr ""
+
+#: includes/settings.php:107
+msgid "Select the list you wish for all donors to subscribe to by default. Note: the list(s) can be customized per form."
+msgstr ""
+
+#: includes/settings.php:115
+msgid "This is the text shown by default next to the ActiveCampaign sign up checkbox. Note: the text can be customized per form."
 msgstr ""

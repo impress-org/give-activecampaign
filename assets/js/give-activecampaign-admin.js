@@ -11,8 +11,6 @@ jQuery( document ).ready( function( $ ) {
 		// Get the value of checked radio button.
 		var customizeOption = $( 'input[name="activecampaign_per_form_options"]:radio:checked' ).val();
 
-		console.log( customizeOption );
-
 		if ( customizeOption === 'enabled' ) {
 			giveActiveCampaignMetaboxField.show();
 		} else {
