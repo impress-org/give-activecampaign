@@ -122,6 +122,7 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 
 			require_once GIVE_ACTIVECAMPAIGN_PATH . '/vendor/autoload.php';
 			require_once GIVE_ACTIVECAMPAIGN_PATH . '/includes/helpers.php';
+			require_once GIVE_ACTIVECAMPAIGN_PATH . '/includes/metabox.php';
 
 		}
 
@@ -349,11 +350,9 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 			$lists = give_get_meta( $payment_data['give_form_id'], '_give_activecampaign_lists', true, array() );
 
 			// Check if lists is set if not use global list(s).
-			if ( empty( $form_lists ) ) {
-
+			if ( empty( $lists ) ) {
 				// Get lists.
 				$lists = give_get_option( 'give_activecampaign_lists', array() );
-
 			}
 
 			$lists = array_unique( $lists );
@@ -362,8 +361,14 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 				$this->subscribe_email( $payment_data['user_info'], $list );
 			}
 
+			$tags = give_get_option( 'give_activecampaign_tags', array() );
+
+			foreach ( $tags as $tag ) {
+				$this->tag_email( $payment_data['user_info'], $tag );
+			}
+
 			// Add meta to the donation post that this donation opted-in to ActiveCampaign.
-			add_post_meta( $payment_id, '_give_activecampaign_donation_optin_status', $lists );
+			add_post_meta( $payment_id, '_give_activecampaign_donation_optin_status', array( 'Lists' => $lists, 'Tags' => $tags ) );
 
 		}
 
@@ -373,12 +378,10 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 		 * @access public
 		 *
 		 * @param array    $user_info Last name.
-		 * @param int|bool $list_id   List ID.
+		 * @param int|bool $list      List ID.
 		 *
 		 * @return bool
 		 * @since  1.0.0
-		 *
-		 * @since  1.0
 		 */
 		public function subscribe_email( $user_info = array(), $list ) {
 
@@ -403,6 +406,45 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 				);
 
 				$ac->api( "contact/add", $subscriber );
+
+			}
+
+			return false;
+		}
+
+		/**
+		 * Add an email address to the ActiveCampaign tag.
+		 *
+		 * @access public
+		 *
+		 * @param array $user_info Last name.
+		 * @param int   $tag       Tag ID.
+		 *
+		 * @return bool
+		 * @since  1.0.0
+		 */
+		public function tag_email( $user_info = array(), $tag ) {
+
+			$api_url = give_get_option( 'give_activecampaign_apiurl', false );
+			$api_key = give_get_option( 'give_activecampaign_api', false );
+
+			if ( $api_url && $api_key ) {
+
+				// Load ActiveCampaign API.
+				if ( ! class_exists( 'ActiveCampaign' ) ) {
+					require_once( 'vendor/ActiveCampaign.class.php' );
+				}
+
+				$ac = new ActiveCampaign( $api_url, $api_key );
+
+				$subscriber = array(
+					"email"      => $user_info['email'],
+					"first_name" => $user_info['first_name'],
+					"last_name"  => $user_info['last_name'],
+					"tags"       => $tag,
+				);
+
+				$ac->api( "contact/tag_add", $subscriber );
 
 			}
 

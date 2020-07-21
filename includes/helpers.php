@@ -78,7 +78,7 @@ function give_get_activecampaign_tags() {
 				continue;
 			}
 
-			$output[ $tag['id'] ] = $tag['name'];
+			$output[ $tag['name'] ] = $tag['name'];
 		}
 
 		return $output;
@@ -91,6 +91,8 @@ function give_get_activecampaign_tags() {
 
 /**
  * Display the opt-in checkbox oon donation forms.
+ *
+ * @param $form_id
  */
 function give_activecampaign_display_optin( $form_id ) {
 
@@ -127,56 +129,13 @@ add_action( 'give_donation_form_before_submit', 'give_activecampaign_display_opt
 
 
 /**
- * Add an email address to the ActiveCampaign list.
- *
- * @access public
- *
- * @param string $email      Email address.
- * @param string $first_name First name.
- * @param string $last_name  Last name.
- * @param int    $list       List ID.
- *
- * @return bool
- * @since  1.0
- *
- */
-function give_activecampaign_subscribe_email( $email, $first_name = '', $last_name = '', $list = 0 ) {
-
-	$api_url = give_get_option( 'give_activecampaign_apiurl', false );
-	$api_key = give_get_option( 'give_activecampaign_api', false );
-
-	if ( $api_key ) {
-
-		// Load ActiveCampaign API.
-		if ( ! class_exists( 'ActiveCampaign' ) ) {
-			require_once( 'vendor/ActiveCampaign.class.php' );
-		}
-
-		$ac = new ActiveCampaign( $api_key, $api_url );
-
-		$subscriber = array(
-			"email"           => "$email",
-			"first_name"      => "$first_name",
-			"last_name"       => "$last_name",
-			"p[{$list}]"      => $list,
-			"status[{$list}]" => 1,
-		);
-
-		$ac->api( "contact/add", $subscriber );
-	}
-
-	return false;
-}
-
-
-/**
  * Show Line item on donation details screen if the donor opted-in to the newsletter.
  *
  * @param $payment_id
  */
 function give_activecampaign_donation_metabox_notification( $payment_id ) {
 
-	$opt_in_meta = give_get_meta( $payment_id, '_give_activecampaign_donation_optin_status', true );
+	$opt_in_meta = give_get_meta( $payment_id, '_give_activecampaign_donation_optin_status', false );
 
 	if ( $opt_in_meta ) { ?>
 		<div class="give-admin-box-inside">
@@ -189,4 +148,21 @@ function give_activecampaign_donation_metabox_notification( $payment_id ) {
 
 }
 
-add_filter( 'give_view_donation_details_totals_after', 'give_activecampaign_donation_metabox_notification', 10, 1 );
+add_filter( 'give_view_donation_details_totals_after', 'give_activecampaign_donation_metabox_notification', 999, 1 );
+
+
+/**
+ * Load the admin scripts.
+ */
+function give_activecampaign_enqueue_admin_scripts() {
+	if ( give_is_admin_page() ) {
+		$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+
+		wp_register_script( 'give-activecampaign-admin', GIVE_ACTIVECAMPAIGN_URL . 'assets/js/give-activecampaign-admin' . $suffix . '.js', array( 'give-admin-scripts' ),
+			GIVE_ACTIVECAMPAIGN_VERSION, false );
+		wp_enqueue_script( 'give-activecampaign-admin' );
+	}
+
+}
+
+add_action( 'admin_enqueue_scripts', 'give_activecampaign_enqueue_admin_scripts' );
