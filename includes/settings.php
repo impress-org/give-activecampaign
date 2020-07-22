@@ -75,9 +75,9 @@ class Give_ActiveCampaign_Settings extends Give_Settings_Page {
 				'type' => 'api_key',
 			),
 			array(
-				'id'   => 'give_activecampaign_checkout',
+				'id'   => 'give_activecampaign_globally_enabled',
 				'name' => esc_html__( 'Enable Globally', 'give-activecampaign' ),
-				'desc' => esc_html__( 'Allow donors to sign up for the list selected below on all donation forms? Note: the list(s) can be customized per form.',
+				'desc' => esc_html__( 'Allow donors to sign up to opt-in on all donation forms? Note: the opt-in can be disabled per form.',
 					'give-activecampaign' ),
 				'type' => 'checkbox',
 			),

@@ -96,6 +96,19 @@ function give_get_activecampaign_tags() {
  */
 function give_activecampaign_display_optin( $form_id ) {
 
+	// Should the opt-in be disabled on this donation form?
+	$form_display_option = give_get_meta( $form_id, 'activecampaign_per_form_options', true );
+
+	if ( 'disabled' === $form_display_option ) {
+		return false;
+	}
+
+	// Is this enabled globally? If not, bounce.
+	$global_display_option = give_get_option( 'give_activecampaign_globally_enabled', false );
+	if ( ! give_is_setting_enabled( $global_display_option ) ) {
+		return false;
+	}
+
 	$label = give_get_option( 'give_activecampaign_label' );
 
 	if ( ! empty( $label ) ) {
@@ -103,9 +116,6 @@ function give_activecampaign_display_optin( $form_id ) {
 	} else {
 		$checkout_label = __( 'Subscribe to our newsletter', 'give-activecampaign' );
 	}
-
-	// Should the opt-on be checked or unchecked by default?
-	$form_option = give_get_meta( $form_id, '_give_mailchimp_checked_default', true );
 
 	$checked = give_get_option( 'give_activecampaign_checkbox_default', false );
 
@@ -156,7 +166,8 @@ add_filter( 'give_view_donation_details_totals_after', 'give_activecampaign_dona
  */
 function give_activecampaign_enqueue_admin_scripts() {
 	if ( give_is_admin_page() ) {
-		wp_register_script( 'give-activecampaign-admin', GIVE_ACTIVECAMPAIGN_URL . 'assets/js/give-activecampaign-admin.js', array( 'give-admin-scripts' ), GIVE_ACTIVECAMPAIGN_VERSION, false );
+		wp_register_script( 'give-activecampaign-admin', GIVE_ACTIVECAMPAIGN_URL . 'assets/js/give-activecampaign-admin.js', array( 'give-admin-scripts' ),
+			GIVE_ACTIVECAMPAIGN_VERSION, false );
 		wp_enqueue_script( 'give-activecampaign-admin' );
 	}
 
