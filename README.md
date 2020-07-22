@@ -4,7 +4,7 @@
 
 ---
 
-🔑 This is a private repository due to it being a premium add-on. Should another developer outside of our organization need access please use Slack to ping the Lead Developer. 
+🔑  This is a private repository due to it being a premium add-on. Should another developer outside of our organization need access please use Slack to ping the Lead Developer. 
 
 ## 🌱 Getting Started 
 
