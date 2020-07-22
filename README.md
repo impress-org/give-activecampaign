@@ -4,6 +4,8 @@
 
 ---
 
+🔑 This is a private repository due to it being a premium add-on. Should another developer outside of our organization need access please use Slack to ping the Lead Developer. 
+
 ## 🌱 Getting Started 
 
 This plugin requires the GiveWP core plugin activated to function properly. When activated, it adds a powerful integration with ActiveCampaign. 
