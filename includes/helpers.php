@@ -98,7 +98,6 @@ function give_activecampaign_display_optin( $form_id ) {
 
 	// Should the opt-in be disabled on this donation form?
 	$form_display_option = give_get_meta( $form_id, 'activecampaign_per_form_options', true );
-
 	if ( 'disabled' === $form_display_option ) {
 		return false;
 	}
@@ -109,15 +108,14 @@ function give_activecampaign_display_optin( $form_id ) {
 		return false;
 	}
 
-	$label = give_get_option( 'give_activecampaign_label' );
-
-	if ( ! empty( $label ) ) {
-		$checkout_label = trim( $label );
+	// Is label and checked by default customized per form?
+	if ( 'customized' === $form_display_option ) {
+		$optin_label = give_get_meta( $form_id, 'give_activecampaign_label', true );
+		$checked = give_get_meta( $form_id, 'give_activecampaign_checkbox_default', true );
 	} else {
-		$checkout_label = __( 'Subscribe to our newsletter', 'give-activecampaign' );
+		$optin_label = give_get_option( 'give_activecampaign_label', esc_html__( 'Subscribe to our newsletter', 'give-activecampaign' ) );
+		$checked = give_get_option( 'give_activecampaign_checkbox_default', false );
 	}
-
-	$checked = give_get_option( 'give_activecampaign_checkbox_default', false );
 
 	ob_start(); ?>
 	<fieldset id="give_activecampaign_<?php echo $form_id; ?>" class="give-activecampaign-fieldset">
@@ -125,8 +123,8 @@ function give_activecampaign_display_optin( $form_id ) {
 			<input name="give_activecampaign_signup"
 			       class="give-activecampaign-optin-input"
 			       id="give_activecampaign_<?php echo $form_id; ?>_signup"
-			       type="checkbox" <?php echo( $checked !== 'no' ? 'checked="checked"' : '' ); ?>/>
-			<span class="give-activecampaign-message-text"><?php echo $checkout_label; ?></span>
+			       type="checkbox" <?php echo(  'on' === $checked ? 'checked="checked"' : '' ); ?>/>
+			<span class="give-activecampaign-message-text"><?php echo $optin_label; ?></span>
 		</label>
 
 	</fieldset>
