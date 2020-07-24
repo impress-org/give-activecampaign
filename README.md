@@ -1,6 +1,6 @@
 <h1><p align="center"> Give - ActiveCampaign Add-on 📧 </p></h1>
 
-<p align="center">ActiveCampaign is one of the most popular email marketing platforms available. This add-on allows you to integrate your donation forms with ease so that your donors are provided an option to opt-in when giving. When activated you can customize the lists and tags donors are assigned when they give on a global and per form basis, modify the opt-in display text, and so much more.</p>
+<p align="center">[ActiveCampaign](https://activecampaign.com/) is one of the most popular email marketing platforms available. This add-on allows you to integrate your donation forms with ease so that your donors are provided an option to opt-in when giving. When activated you can customize the lists and tags donors are assigned when they give on a global and per form basis, modify the opt-in display text, and more.</p>
 
 ---
 
