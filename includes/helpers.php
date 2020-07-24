@@ -90,9 +90,12 @@ function give_get_activecampaign_tags() {
 }
 
 /**
+ *
  * Display the opt-in checkbox oon donation forms.
  *
  * @param $form_id
+ *
+ * @return bool
  */
 function give_activecampaign_display_optin( $form_id ) {
 
@@ -102,9 +105,9 @@ function give_activecampaign_display_optin( $form_id ) {
 		return false;
 	}
 
-	// Is this enabled globally? If not, bounce.
+	// Is this enabled globally and not enabled the form? If not, bounce.
 	$global_display_option = give_get_option( 'give_activecampaign_globally_enabled', false );
-	if ( ! give_is_setting_enabled( $global_display_option ) ) {
+	if ( ! give_is_setting_enabled( $global_display_option ) && 'customized' !== $form_display_option ) {
 		return false;
 	}
 

@@ -336,6 +336,7 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 		 * @param $payment_id   int
 		 * @param $payment_data array
 		 *
+		 * @return bool
 		 * @since  1.0.0
 		 * @access public
 		 *
@@ -344,24 +345,31 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 
 			// Check to see if the user has elected to subscribe.
 			if ( ! isset( $_POST['give_activecampaign_signup'] ) || $_POST['give_activecampaign_signup'] !== 'on' ) {
-				return;
+				return false;
 			}
 
-			$lists = give_get_meta( $payment_data['give_form_id'], '_give_activecampaign_lists', true, array() );
+			$form_id             = $payment_data['give_form_id'];
+			$form_display_option = give_get_meta( $form_id, 'activecampaign_per_form_options', true );
 
-			// Check if lists is set if not use global list(s).
-			if ( empty( $lists ) ) {
-				// Get lists.
+			// Is AC disabled for this payment's form?
+			if ( 'disabled' === $form_display_option ) {
+				return false;
+			}
+
+			// Check if lists / tags is set for customized form if not use global list(s).
+			if ( 'customized' === $form_display_option ) {
+				$lists = give_get_meta( $form_id, 'give_activecampaign_lists', true, array() );
+				$tags  = give_get_meta( $form_id, 'give_activecampaign_tags', true, array() );
+			} else {
+				// Get lists / tags.
 				$lists = give_get_option( 'give_activecampaign_lists', array() );
+				$tags  = give_get_option( 'give_activecampaign_tags', array() );
 			}
 
-			$lists = array_unique( $lists );
-
+			// Loop through lists & tags and subscribe email.
 			foreach ( $lists as $list ) {
 				$this->subscribe_email( $payment_data['user_info'], $list );
 			}
-
-			$tags = give_get_option( 'give_activecampaign_tags', array() );
 
 			foreach ( $tags as $tag ) {
 				$this->tag_email( $payment_data['user_info'], $tag );
