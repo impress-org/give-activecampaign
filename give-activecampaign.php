@@ -367,13 +367,18 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 			}
 
 			// Loop through lists & tags and subscribe email.
-			foreach ( $lists as $list ) {
-				$this->subscribe_email( $payment_data['user_info'], $list );
+			if ( is_array( $lists ) && ! empty( $lists ) ) {
+				foreach ( $lists as $list ) {
+					$this->subscribe_email( $payment_data['user_info'], $list );
+				}
 			}
 
-			foreach ( $tags as $tag ) {
-				$this->tag_email( $payment_data['user_info'], $tag );
+			if ( is_array( $tags ) && ! empty( $tags ) ) {
+				foreach ( $tags as $tag ) {
+					$this->tag_email( $payment_data['user_info'], $tag );
+				}
 			}
+
 
 			// Add meta to the donation post that this donation opted-in to ActiveCampaign.
 			add_post_meta( $payment_id, '_give_activecampaign_donation_optin_status', array( 'Lists' => $lists, 'Tags' => $tags ) );
