@@ -379,9 +379,10 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 				}
 			}
 
-
 			// Add meta to the donation post that this donation opted-in to ActiveCampaign.
-			add_post_meta( $payment_id, '_give_activecampaign_donation_optin_status', array( 'Lists' => $lists, 'Tags' => $tags ) );
+			if ( ! empty( $tags ) || ! empty( $lists ) ) {
+				add_post_meta( $payment_id, '_give_activecampaign_donation_optin_status', 'true' );
+			}
 
 		}
 
