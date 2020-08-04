@@ -366,18 +366,8 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 				$tags  = give_get_option( 'give_activecampaign_tags', array() );
 			}
 
-			// Loop through lists & tags and subscribe email.
-			if ( is_array( $lists ) && ! empty( $lists ) ) {
-				foreach ( $lists as $list ) {
-					$this->subscribe_email( $payment_data['user_info'], $list );
-				}
-			}
-
-			if ( is_array( $tags ) && ! empty( $tags ) ) {
-				foreach ( $tags as $tag ) {
-					$this->tag_email( $payment_data['user_info'], $tag );
-				}
-			}
+			// Subscribe email.
+			$this->subscribe_email( $payment_data['user_info'], $lists, $tags );
 
 			// Add meta to the donation post that this donation opted-in to ActiveCampaign.
 			if ( ! empty( $tags ) || ! empty( $lists ) ) {
@@ -391,74 +381,32 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 		 *
 		 * @access public
 		 *
-		 * @param array    $user_info Last name.
-		 * @param int|bool $list      List ID.
-		 *
-		 * @return bool
-		 * @since  1.0.0
-		 */
-		public function subscribe_email( $user_info = array(), $list ) {
-
-			$api_url = give_get_option( 'give_activecampaign_apiurl', false );
-			$api_key = give_get_option( 'give_activecampaign_api', false );
-
-			if ( $api_url && $api_key ) {
-
-				// Load ActiveCampaign API.
-				if ( ! class_exists( 'ActiveCampaign' ) ) {
-					require_once( 'vendor/ActiveCampaign.class.php' );
-				}
-
-				$ac = new ActiveCampaign( $api_url, $api_key );
-
-				$subscriber = array(
-					"email"           => $user_info['email'],
-					"first_name"      => $user_info['first_name'],
-					"last_name"       => $user_info['last_name'],
-					"p[{$list}]"      => $list,
-					"status[{$list}]" => 1,
-				);
-
-				$ac->api( "contact/add", $subscriber );
-
-			}
-
-			return false;
-		}
-
-		/**
-		 * Add an email address to the ActiveCampaign tag.
-		 *
-		 * @access public
-		 *
 		 * @param array $user_info Last name.
-		 * @param int   $tag       Tag ID.
 		 *
 		 * @return bool
 		 * @since  1.0.0
 		 */
-		public function tag_email( $user_info = array(), $tag ) {
+		public function subscribe_email( $user_info = [], $lists = [], $tags = [] ) {
 
 			$api_url = give_get_option( 'give_activecampaign_apiurl', false );
 			$api_key = give_get_option( 'give_activecampaign_api', false );
 
 			if ( $api_url && $api_key ) {
 
-				// Load ActiveCampaign API.
-				if ( ! class_exists( 'ActiveCampaign' ) ) {
-					require_once( 'vendor/ActiveCampaign.class.php' );
-				}
-
 				$ac = new ActiveCampaign( $api_url, $api_key );
 
-				$subscriber = array(
+				$subscriber = [
 					"email"      => $user_info['email'],
 					"first_name" => $user_info['first_name'],
 					"last_name"  => $user_info['last_name'],
-					"tags"       => $tag,
-				);
+					"tags"       => implode( ', ', $tags ),
+				];
 
-				$ac->api( "contact/tag_add", $subscriber );
+				foreach ( $lists as $list ) {
+					$subscriber["p[$list]"] = $list;
+				}
+
+				$response = $ac->api( "contact/add", $subscriber );
 
 			}
 
@@ -475,7 +423,7 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 			give_add_email_tag(
 				array(
 					'tag'      => 'give_activecampaign_status', // The tag name.
-					'desc'     => __( 'This outputs whether the donor opted-in to the Newsletter', 'give-activecampaign' ), // For admins.
+					'desc'     => esc_html__( 'This outputs whether the donor opted-in to the ActiveCampaign', 'give-activecampaign' ), // For admins.
 					'func'     => [ $this, 'status_email_tag' ], // Callback to function below.
 					'context'  => 'donation',
 					'is_admin' => false, // default is false. This is here to simply display it as an option.

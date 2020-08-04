@@ -14,11 +14,6 @@ function give_get_activecampaign_lists() {
 		return array();
 	}
 
-	// Load ActiveCampaign API
-	if ( ! class_exists( 'ActiveCampaign' ) ) {
-		require_once( GIVE_ACTIVECAMPAIGN_PATH . '/vendor/ActiveCampaign.class.php' );
-	}
-
 	$ac = new ActiveCampaign( $api_url, $api_key );
 
 	$lists = $ac->api( 'list/list', array( 'ids' => 'all' ) );
@@ -56,11 +51,6 @@ function give_get_activecampaign_tags() {
 
 	if ( ! $api_url || ! $api_key ) {
 		return array();
-	}
-
-	// Load ActiveCampaign API
-	if ( ! class_exists( 'ActiveCampaign' ) ) {
-		require_once( GIVE_ACTIVECAMPAIGN_PATH . '/vendor/ActiveCampaign.class.php' );
 	}
 
 	$ac = new ActiveCampaign( $api_url, $api_key );
@@ -134,7 +124,6 @@ function give_activecampaign_display_optin( $form_id ) {
 	<?php
 	echo ob_get_clean();
 }
-
 
 add_action( 'give_donation_form_before_submit', 'give_activecampaign_display_optin', 10, 1 );
 
