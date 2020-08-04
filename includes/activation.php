@@ -25,7 +25,7 @@ function give_activecampaign_plugin_action_links( $actions ) {
 	$new_actions = array(
 		'settings' => sprintf(
 			'<a href="%1$s">%2$s</a>',
-			admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=give-activecampaign&section=activecampaign-settings' ),
+			admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=activecampaign&section=activecampaign-settings' ),
 			esc_html__( 'Settings', 'give-activecampaign' )
 		),
 	);
