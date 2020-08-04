@@ -327,6 +327,8 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 
 			$settings[] = require_once GIVE_ACTIVECAMPAIGN_PATH . '/includes/settings.php';
 
+			new Give_ActiveCampaign_Settings();
+
 			return $settings;
 		}
 
@@ -440,11 +442,12 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 		 * @since 1.0.0
 		 */
 		public function status_email_tag( $tag_args ) {
-			$opt_in_meta = give_get_meta( $tag_args['payment_id'], '_give_mc_donation_optin_status', true );
-			$output      = __( 'Did not subscribe to newsletter', 'give-activecampaign' );
+			$opt_in_meta = give_get_meta( $tag_args['payment_id'], '_give_activecampaign_donation_optin_status', true, false );
 
 			if ( ! empty( $opt_in_meta ) ) {
-				$output = __( 'Subscribed to newsletter', 'give-activecampaign' );
+				$output = esc_html__( 'Subscribed to newsletter', 'give-activecampaign' );
+			} else {
+				$output = esc_html__( 'Did not subscribe to newsletter', 'give-activecampaign' );
 			}
 
 			/**

@@ -146,6 +146,3 @@ class Give_ActiveCampaign_Settings extends Give_Settings_Page {
 
 
 }
-
-
-return new Give_ActiveCampaign_Settings();
