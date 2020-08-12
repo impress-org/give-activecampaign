@@ -2,9 +2,9 @@
 Contributors: givewp
 Tags: givewp, activecampaign, active campaign, email, email marketing
 Requires at least: 4.8
-Tested up to: 5.4
+Tested up to: 5.5
 Stable tag: 1.0.0
-Requires Give: 2.7.0
+Requires Give: 2.7.5
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -38,5 +38,5 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 
 == Changelog ==
 
-= 1.0.0 =
+= 1.0.0: August 11th, 2020 =
 * Initial plugin release. Yippee!

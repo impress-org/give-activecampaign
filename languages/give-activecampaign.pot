@@ -24,20 +24,20 @@ msgstr ""
 msgid "<strong>Activation Error:</strong> You must have the <a href=\"%1$s\" target=\"_blank\">Give</a> core version %2$s for the Give - ActiveCampaign add-on to activate."
 msgstr ""
 
-#: give-activecampaign.php:257, includes/helpers.php:154, includes/metabox.php:14, includes/settings.php:29
+#: give-activecampaign.php:257, includes/helpers.php:143, includes/metabox.php:14, includes/settings.php:29
 msgid "ActiveCampaign"
 msgstr ""
 
-#: give-activecampaign.php:472
-msgid "This outputs whether the donor opted-in to the Newsletter"
+#: give-activecampaign.php:428
+msgid "This outputs whether the donor opted-in to the ActiveCampaign"
 msgstr ""
 
-#: give-activecampaign.php:490
-msgid "Did not subscribe to newsletter"
-msgstr ""
-
-#: give-activecampaign.php:493
+#: give-activecampaign.php:448
 msgid "Subscribed to newsletter"
+msgstr ""
+
+#: give-activecampaign.php:450
+msgid "Did not subscribe to newsletter"
 msgstr ""
 
 #: includes/activation.php:29
@@ -52,11 +52,11 @@ msgstr ""
 msgid "Add-ons"
 msgstr ""
 
-#: includes/helpers.php:119, includes/metabox.php:70, includes/settings.php:119
+#: includes/helpers.php:109, includes/metabox.php:70, includes/settings.php:119
 msgid "Subscribe to our newsletter"
 msgstr ""
 
-#: includes/helpers.php:155
+#: includes/helpers.php:144
 msgid "Opted-in"
 msgstr ""
 
