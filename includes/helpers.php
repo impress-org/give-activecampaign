@@ -3,9 +3,22 @@
 /**
  * Get the lists from ActiveCampaign
  *
- * @return array
+ * @return array|bool
  */
 function give_get_activecampaign_lists() {
+
+	global $post;
+
+	$post = isset($_GET['post']) ? $_GET['post'] : false;
+	$post = $post ? get_post($post) : false;
+
+	$is_settings_screen = ( isset( $_GET['tab'] ) && 'activecampaign' === $_GET['tab'] );
+	$is_form_edit_screen = ( $post && 'give_forms' === $post->post_type );
+
+	// This function only runs when viewing the option on the settings screen or metabox.
+	if ( ! $is_settings_screen && ! $is_form_edit_screen  )  {
+		return false;
+	}
 
 	$api_url = give_get_option( 'give_activecampaign_apiurl', false );
 	$api_key = give_get_option( 'give_activecampaign_api', false );
@@ -104,10 +117,10 @@ function give_activecampaign_display_optin( $form_id ) {
 	// Is label and checked by default customized per form?
 	if ( 'customized' === $form_display_option ) {
 		$optin_label = give_get_meta( $form_id, 'give_activecampaign_label', true );
-		$checked = give_get_meta( $form_id, 'give_activecampaign_checkbox_default', true );
+		$checked     = give_get_meta( $form_id, 'give_activecampaign_checkbox_default', true );
 	} else {
 		$optin_label = give_get_option( 'give_activecampaign_label', esc_html__( 'Subscribe to our newsletter', 'give-activecampaign' ) );
-		$checked = give_get_option( 'give_activecampaign_checkbox_default', false );
+		$checked     = give_get_option( 'give_activecampaign_checkbox_default', false );
 	}
 
 	ob_start(); ?>
@@ -116,7 +129,7 @@ function give_activecampaign_display_optin( $form_id ) {
 			<input name="give_activecampaign_signup"
 			       class="give-activecampaign-optin-input"
 			       id="give_activecampaign_<?php echo $form_id; ?>_signup"
-			       type="checkbox" <?php echo(  'on' === $checked ? 'checked="checked"' : '' ); ?>/>
+			       type="checkbox" <?php echo( 'on' === $checked ? 'checked="checked"' : '' ); ?>/>
 			<span class="give-activecampaign-message-text"><?php echo $optin_label; ?></span>
 		</label>
 
