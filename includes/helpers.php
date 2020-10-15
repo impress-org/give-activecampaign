@@ -15,19 +15,19 @@ function give_get_activecampaign_lists() {
 	$api_key = give_get_option( 'give_activecampaign_api', false );
 
 	if ( ! $api_url || ! $api_key ) {
-		return array();
+		return [];
 	}
 
 	$ac = new ActiveCampaign( $api_url, $api_key );
 
-	$lists = $ac->api( 'list/list', array( 'ids' => 'all' ) );
+	$lists = $ac->api( 'list/list', [ 'ids' => 'all' ] );
 
 	if ( (int) $lists->success ) {
 
 		// We need to cast the object to an array because ActiveCampaign returns invalid JSON.
 		$lists = (array) $lists;
 
-		$output = array();
+		$output = [];
 
 		foreach ( $lists as $key => $list ) {
 			if ( ! is_numeric( $key ) ) {
@@ -39,7 +39,7 @@ function give_get_activecampaign_lists() {
 
 		return $output;
 	} else {
-		return array();
+		return [];
 	}
 }
 
@@ -58,18 +58,18 @@ function give_get_activecampaign_tags() {
 	$api_key = give_get_option( 'give_activecampaign_api', false );
 
 	if ( ! $api_url || ! $api_key ) {
-		return array();
+		return [];
 	}
 
 	$ac = new ActiveCampaign( $api_url, $api_key );
 
-	$tags = $ac->api( 'tags/list', array( 'ids' => 'all' ) );
+	$tags = $ac->api( 'tags/list', [ 'ids' => 'all' ] );
 
 	$tags = json_decode( $tags, true );
 
 	if ( ! empty( $tags ) ) {
 
-		$output = array();
+		$output = [];
 
 		foreach ( $tags as $key => $tag ) {
 			if ( ! is_numeric( $key ) ) {
@@ -82,7 +82,7 @@ function give_get_activecampaign_tags() {
 		return $output;
 
 	} else {
-		return array();
+		return [];
 	}
 
 }
@@ -90,11 +90,10 @@ function give_get_activecampaign_tags() {
 /**
  * Should the API fields load in
  *
- * @return false
  * @since 1.0.1
+ * @return bool
  */
 function give_activecampaign_should_load_api_fields() {
-
 	$post = isset( $_GET['post'] ) ? $_GET['post'] : false;
 	$post = $post ? get_post( $post ) : false;
 
@@ -102,12 +101,7 @@ function give_activecampaign_should_load_api_fields() {
 	$is_form_edit_screen = ( $post && 'give_forms' === $post->post_type );
 
 	// This function only runs when viewing the option on the settings screen or metabox.
-	if ( $is_settings_screen || $is_form_edit_screen ) {
-		return true;
-	}
-
-	return false;
-
+	return $is_settings_screen || $is_form_edit_screen;
 }
 
 /**
@@ -142,16 +136,16 @@ function give_activecampaign_display_optin( $form_id ) {
 	}
 
 	ob_start(); ?>
-	<fieldset id="give_activecampaign_<?php echo $form_id; ?>" class="give-activecampaign-fieldset">
-		<label for="give_activecampaign_<?php echo $form_id; ?>_signup" class="give-activecampaign-optin-label">
-			<input name="give_activecampaign_signup"
-			       class="give-activecampaign-optin-input"
-			       id="give_activecampaign_<?php echo $form_id; ?>_signup"
-			       type="checkbox" <?php echo( 'on' === $checked ? 'checked="checked"' : '' ); ?>/>
-			<span class="give-activecampaign-message-text"><?php echo $optin_label; ?></span>
-		</label>
+    <fieldset id="give_activecampaign_<?php echo $form_id; ?>" class="give-activecampaign-fieldset">
+        <label for="give_activecampaign_<?php echo $form_id; ?>_signup" class="give-activecampaign-optin-label">
+            <input name="give_activecampaign_signup"
+                   class="give-activecampaign-optin-input"
+                   id="give_activecampaign_<?php echo $form_id; ?>_signup"
+                   type="checkbox" <?php echo( 'on' === $checked ? 'checked="checked"' : '' ); ?>/>
+            <span class="give-activecampaign-message-text"><?php echo $optin_label; ?></span>
+        </label>
 
-	</fieldset>
+    </fieldset>
 	<?php
 	echo ob_get_clean();
 }
@@ -169,12 +163,12 @@ function give_activecampaign_donation_metabox_notification( $payment_id ) {
 	$opt_in_meta = give_get_meta( $payment_id, '_give_activecampaign_donation_optin_status', false );
 
 	if ( $opt_in_meta ) { ?>
-		<div class="give-admin-box-inside">
-			<p>
-				<span class="label"><?php _e( 'ActiveCampaign', 'give-activecampaign' ); ?>:</span>&nbsp;
-				<span><?php _e( 'Opted-in', 'give-activecampaign' ); ?></span>
-			</p>
-		</div>
+        <div class="give-admin-box-inside">
+            <p>
+                <span class="label"><?php _e( 'ActiveCampaign', 'give-activecampaign' ); ?>:</span>&nbsp;
+                <span><?php _e( 'Opted-in', 'give-activecampaign' ); ?></span>
+            </p>
+        </div>
 	<?php }
 
 }
@@ -187,7 +181,7 @@ add_filter( 'give_view_donation_details_totals_after', 'give_activecampaign_dona
  */
 function give_activecampaign_enqueue_admin_scripts() {
 	if ( give_is_admin_page() ) {
-		wp_register_script( 'give-activecampaign-admin', GIVE_ACTIVECAMPAIGN_URL . 'assets/js/give-activecampaign-admin.js', array( 'give-admin-scripts' ),
+		wp_register_script( 'give-activecampaign-admin', GIVE_ACTIVECAMPAIGN_URL . 'assets/js/give-activecampaign-admin.js', [ 'give-admin-scripts' ],
 			GIVE_ACTIVECAMPAIGN_VERSION, false );
 		wp_enqueue_script( 'give-activecampaign-admin' );
 	}
