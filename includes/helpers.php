@@ -7,16 +7,7 @@
  */
 function give_get_activecampaign_lists() {
 
-	global $post;
-
-	$post = isset($_GET['post']) ? $_GET['post'] : false;
-	$post = $post ? get_post($post) : false;
-
-	$is_settings_screen = ( isset( $_GET['tab'] ) && 'activecampaign' === $_GET['tab'] );
-	$is_form_edit_screen = ( $post && 'give_forms' === $post->post_type );
-
-	// This function only runs when viewing the option on the settings screen or metabox.
-	if ( ! $is_settings_screen && ! $is_form_edit_screen  )  {
+	if ( ! give_activecampaign_should_load_api_fields() ) {
 		return false;
 	}
 
@@ -55,9 +46,13 @@ function give_get_activecampaign_lists() {
 /**
  * Pull tags into
  *
- * @return array
+ * @return array|bool
  */
 function give_get_activecampaign_tags() {
+
+	if ( ! give_activecampaign_should_load_api_fields() ) {
+		return false;
+	}
 
 	$api_url = give_get_option( 'give_activecampaign_apiurl', false );
 	$api_key = give_get_option( 'give_activecampaign_api', false );
@@ -89,6 +84,29 @@ function give_get_activecampaign_tags() {
 	} else {
 		return array();
 	}
+
+}
+
+/**
+ * Should the API fields load in
+ *
+ * @return false
+ * @since 1.0.1
+ */
+function give_activecampaign_should_load_api_fields() {
+
+	$post = isset( $_GET['post'] ) ? $_GET['post'] : false;
+	$post = $post ? get_post( $post ) : false;
+
+	$is_settings_screen  = ( isset( $_GET['tab'] ) && 'activecampaign' === $_GET['tab'] );
+	$is_form_edit_screen = ( $post && 'give_forms' === $post->post_type );
+
+	// This function only runs when viewing the option on the settings screen or metabox.
+	if ( $is_settings_screen || $is_form_edit_screen ) {
+		return true;
+	}
+
+	return false;
 
 }
 
