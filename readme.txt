@@ -38,5 +38,8 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 
 == Changelog ==
 
+= 1.0.1: November 6th, 2020 =
+* Fix: Reduce calls to Active Campaign to only when necessary
+
 = 1.0.0: August 11th, 2020 =
 * Initial plugin release. Yippee!
