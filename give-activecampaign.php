@@ -5,7 +5,7 @@
  * Description: Easily display an ActiveCampaign opt-in option within your donation forms.
  * Author: GiveWP
  * Author URI: https://givewp.com/
- * Version: 1.0.0
+ * Version: 1.0.1
  * Text Domain: give-activecampaign
  * Domain Path: languages
  */
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Plugin constants.
 if ( ! defined( 'GIVE_ACTIVECAMPAIGN_VERSION' ) ) {
-	define( 'GIVE_ACTIVECAMPAIGN_VERSION', '1.0.0' );
+	define( 'GIVE_ACTIVECAMPAIGN_VERSION', '1.0.1' );
 }
 if ( ! defined( 'GIVE_ACTIVECAMPAIGN_MIN_GIVE_VER' ) ) {
 	define( 'GIVE_ACTIVECAMPAIGN_MIN_GIVE_VER', '2.7.0' );
