@@ -1,15 +1,23 @@
 {
   "name": "impress-org/give-activecampaign",
-  "authors": [
-    {
-      "name": "GiveWP",
-      "email": "support@givewp.com",
-      "homepage": "https://givewp.com",
-      "role": "Developer"
-    }
-  ],
+  "type": "wordpress-plugin",
+  "scripts": {
+    "unreleased": "./vendor/bin/since-unreleased.sh"
+  },
   "require": {
     "activecampaign/api-php": "2.0.3"
   },
-  "minimum-stability": "dev"
+  "require-dev": {
+    "kjohnson/since-unreleased": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "GiveActiveCampaign\\": "src/"
+    }
+  },
+  "config": {
+    "platform": {
+      "php": "7.2"
+    }
+  }
 }
