@@ -64,6 +64,14 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 		 */
 		public $notices = array();
 
+        /**
+         * @unreleased
+         * @var array
+         */
+        private $serviceProviders = [
+            \GiveActiveCampaign\FormExtension\ServiceProvider::class,
+        ];
+
 		/**
 		 * Returns the singleton instance of this class.
 		 *
@@ -87,7 +95,12 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 		 */
 		private function setup() {
 
-			add_action( 'give_init', array( $this, 'init' ), 10 );
+            require_once GIVE_ACTIVECAMPAIGN_PATH . '/vendor/autoload.php';
+
+            // Load service providers.
+            add_action('before_give_init', [$this, 'registerServiceProviders']);
+
+            add_action( 'give_init', array( $this, 'init' ), 10 );
 			add_action( 'admin_init', array( $this, 'check_environment' ) );
 			add_action( 'admin_notices', array( $this, 'admin_notices' ), 15 );
 			add_action( 'give_add_email_tags', array( $this, 'add_email_tags' ), 9999999 );
@@ -98,6 +111,22 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 			add_filter( 'give-settings_get_settings_pages', array( $this, 'global_settings' ), 10, 1 );
 
 		}
+
+        /**
+         * Register service providers
+         *
+         * @unreleased
+         */
+        public function registerServiceProviders()
+        {
+            if ( ! $this->get_environment_warning() ) {
+                return;
+            }
+
+            foreach ($this->serviceProviders as $className) {
+                give()->registerServiceProvider($className);
+            }
+        }
 
 		/**
 		 * Init the plugin after plugins_loaded so environment variables are set.
@@ -120,7 +149,6 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 				return false;
 			}
 
-			require_once GIVE_ACTIVECAMPAIGN_PATH . '/vendor/autoload.php';
 			require_once GIVE_ACTIVECAMPAIGN_PATH . '/includes/helpers.php';
 			require_once GIVE_ACTIVECAMPAIGN_PATH . '/includes/metabox.php';
 
