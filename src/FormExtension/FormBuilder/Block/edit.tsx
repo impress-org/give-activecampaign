@@ -2,30 +2,46 @@ import {__} from '@wordpress/i18n';
 import {BlockEditProps} from '@wordpress/blocks';
 import {InspectorControls} from '@wordpress/block-editor';
 import {PanelBody, CheckboxControl, SelectControl, TextControl, ToggleControl} from '@wordpress/components';
+import BlockPlaceholder from "./BlockPlaceholder";
+import {getWindowData} from "./window";
+import BlockNotice from "./BlockNotice";
 
-declare const window: {
-    GiveActiveCampaign: {
-            lists?: Array<{ id: string; name: string }>,
-            tags?: Array<{ id: string; name: string }>
-        }
-} & Window
+const {lists, tags} = getWindowData();
 
-const listOptions = window.GiveActiveCampaign.lists;
-const tagOptions = window.GiveActiveCampaign.tags;
+const formsListOptions = lists.map(function ({ id, name }) {
+    return { value: id, label: name };
+});
+const tagsListOptions = tags.map(function ({ id, name }) {
+    return { value: id, label: name };
+});
 
 /**
  * @unreleased
  */
 export default function Edit({attributes, setAttributes}: BlockEditProps<any>) {
     const {defaultChecked, label, selectedLists, selectedTags} = attributes;
+    const {settingsUrl, requiresSetup} = getWindowData();
+
     // @ts-ignore
     return (
         <>
-            <div className={'givewp-activecampaign-block-placeholder'}>
-                <CheckboxControl checked={defaultChecked} label={label} onChange={null} disabled={true} />
-            </div>
+            <BlockPlaceholder {...{ defaultChecked, label }} />
             <InspectorControls>
-                <PanelBody title={__('Field Settings', 'give-activecampaign')} initialOpen={true}>
+                <PanelBody
+                    title={__("Field Settings", "give-convertkit")}
+                    initialOpen={true}
+                >
+                    {requiresSetup ? (
+                        <BlockNotice
+                            title={__("ActiveCampaign requires setup", "give")}
+                            description={__(
+                                "This block requires your settings to be configured in order to use.",
+                                "give"
+                            )}
+                            anchorText={__("Connect your ActiveCampaign account", "give")}
+                            href={settingsUrl}
+                        />
+                    ) : (
                     <div className={'givewp-activecampaign-controls'}>
                         <TextControl
                             label={__('Custom Label', 'give-activecampaign')}
@@ -50,7 +66,7 @@ export default function Edit({attributes, setAttributes}: BlockEditProps<any>) {
                             value={selectedLists}
                             onChange={(value) => setAttributes({selectedLists: value})}
                             // @ts-ignore
-                            options={listOptions}
+                            options={formsListOptions}
                         />
 
                         <SelectControl
@@ -59,9 +75,10 @@ export default function Edit({attributes, setAttributes}: BlockEditProps<any>) {
                             value={selectedTags}
                             onChange={(value) => setAttributes({selectedTags: value})}
                             // @ts-ignore
-                            options={tagOptions}
+                            options={tagsListOptions}
                         />
                     </div>
+                    )}
                 </PanelBody>
             </InspectorControls>
         </>
