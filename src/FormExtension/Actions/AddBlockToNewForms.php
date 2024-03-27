@@ -15,7 +15,9 @@ class AddBlockToNewForms
      */
     public function __invoke(DonationForm $form)
     {
-        if($this->isEnabledGlobally()) {
+        $activeCampaign = give(\ActiveCampaign::class);
+        
+        if ($this->isEnabledGlobally() && $activeCampaign->credentials_test()) {
             $form->blocks->insertAfter('givewp/email', BlockModel::make([
                 'name' => 'give-activecampaign/activecampaign',
                 'attributes' => [
