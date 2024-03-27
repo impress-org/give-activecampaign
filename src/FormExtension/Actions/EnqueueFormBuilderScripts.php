@@ -46,7 +46,7 @@ class EnqueueFormBuilderScripts
         wp_enqueue_script('givewp-form-extension-activecampaign', $this->scriptSrc, $this->scriptAsset['dependencies']);
         wp_localize_script('givewp-form-extension-activecampaign', 'GiveActiveCampaign', [
             'requiresSetup' => !$this->activecampaign->credentials_test(),
-            'settingsUrl'   =>  '/wp-admin/edit.php?post_type=give_forms&page=give-settings&tab=activecampaign',
+            'settingsUrl'   =>  admin_url('edit.php?post_type=give_forms&page=give-settings&tab=activecampaign'),
             'lists' =>  $this->getLists(),
             'tags'  => $this->getTags(),
         ]);
