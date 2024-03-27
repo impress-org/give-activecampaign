@@ -1,8 +1,8 @@
 import { CheckboxControl } from "@wordpress/components";
 import { __ } from "@wordpress/i18n";
-import "./styles.scss";
 import { getWindowData } from "../window";
 import { createInterpolateElement } from "@wordpress/element";
+import "./styles.scss";
 
 /**
  * @since 2.0.0
@@ -18,7 +18,7 @@ export default function BlockPlaceholder({ defaultChecked, label }) {
       {requiresSetup ? (
         createInterpolateElement(
           __(
-            "This block requires additional setup. Go to your <a>Settings</a> to connect your Active Campaign account.",
+            "This block requires additional setup. Go to your <a>Settings</a> to connect your ActiveCampaign account.",
             "give"
           ),
           {

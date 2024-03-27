@@ -2,8 +2,6 @@
 
 namespace GiveActiveCampaign\FormExtension\Actions;
 
-use Give\Log\Log;
-
 class EnqueueFormBuilderScripts
 {
     /**
@@ -45,10 +43,11 @@ class EnqueueFormBuilderScripts
      */
     public function __invoke()
     {
-        wp_enqueue_script('givewp-form-extension-activecampaign', $this->scriptSrc, $this->scriptAsset['dependencies']);
+        $tags = json_decode($this->activecampaign->api( 'tags/list', [ 'ids' => 'all' ] ));
         
+        wp_enqueue_script('givewp-form-extension-activecampaign', $this->scriptSrc, $this->scriptAsset['dependencies']);
         wp_localize_script('givewp-form-extension-activecampaign', 'GiveActiveCampaign', [
-            'requiresSetup' => ! $this->activecampaign->credentials_test(),
+            'requiresSetup' => !$this->activecampaign->credentials_test(),
             'settingsUrl'   =>  '/wp-admin/edit.php?post_type=give_forms&page=give-settings&tab=activecampaign',
             'lists' =>  $this->getLists(),
             'tags'  => $this->getTags(),
