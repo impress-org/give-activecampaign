@@ -54,6 +54,9 @@ class EnqueueFormBuilderScripts
         wp_enqueue_style('givewp-form-extension-active-campaign', $this->styleSrc);
     }
 
+    /**
+     * @unreleased
+     */
     protected function getLists(): array
     {
         if ($this->activecampaign->credentials_test()) {
@@ -70,7 +73,10 @@ class EnqueueFormBuilderScripts
         
         return [];
     }
-
+    
+    /**
+     * @unreleased
+     */
     protected function getTags(): array
     {
         if ($this->activecampaign->credentials_test()) {

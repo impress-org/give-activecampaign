@@ -5,7 +5,7 @@ import { createInterpolateElement } from "@wordpress/element";
 import "./styles.scss";
 
 /**
- * @since 2.0.0
+ * @unreleased
  */
 export default function BlockPlaceholder({ defaultChecked, label }) {
   const { requiresSetup, settingsUrl } = getWindowData();
