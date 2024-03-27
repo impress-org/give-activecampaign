@@ -8,25 +8,25 @@ class EnqueueFormBuilderScripts
      * @var \ActiveCampaign
      */
     protected $activecampaign;
-    
+
     /**
      * @unreleased
      * @var string
      */
     protected $styleSrc;
-    
+
     /**
      * @unreleased
      * @var string
      */
     protected $scriptSrc;
-    
+
     /**
      * @unreleased
      * @var array
      */
     protected $scriptAsset;
-    
+
     /**
      * @unreleased
      */
@@ -37,14 +37,12 @@ class EnqueueFormBuilderScripts
         $this->scriptSrc = GIVE_ACTIVECAMPAIGN_URL . 'build/FormBuilder.js';
         $this->scriptAsset = require GIVE_ACTIVECAMPAIGN_DIR . 'build/FormBuilder.asset.php';
     }
-    
+
     /**
      * @unreleased
      */
     public function __invoke()
     {
-        $tags = json_decode($this->activecampaign->api( 'tags/list', [ 'ids' => 'all' ] ));
-        
         wp_enqueue_script('givewp-form-extension-activecampaign', $this->scriptSrc, $this->scriptAsset['dependencies']);
         wp_localize_script('givewp-form-extension-activecampaign', 'GiveActiveCampaign', [
             'requiresSetup' => !$this->activecampaign->credentials_test(),
@@ -55,7 +53,7 @@ class EnqueueFormBuilderScripts
         
         wp_enqueue_style('givewp-form-extension-active-campaign', $this->styleSrc);
     }
-    
+
     protected function getLists(): array
     {
         if ($this->activecampaign->credentials_test()) {
@@ -72,7 +70,7 @@ class EnqueueFormBuilderScripts
         
         return [];
     }
-    
+
     protected function getTags(): array
     {
         if ($this->activecampaign->credentials_test()) {
