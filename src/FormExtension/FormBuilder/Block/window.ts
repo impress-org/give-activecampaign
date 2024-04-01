@@ -5,8 +5,8 @@
 type windowData = {
   requiresSetup: boolean;
   settingsUrl: string;
-  lists: [],
-  tags: []
+  lists: lists[];
+  tags: tag[];
 };
 
 declare const window: {
@@ -16,3 +16,13 @@ declare const window: {
 export function getWindowData(): windowData {
   return window.GiveActiveCampaign;
 }
+
+export type tag = {
+  value: string;
+  label: string;
+};
+
+export type lists = {
+  id: string;
+  name: string;
+};
