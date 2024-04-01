@@ -45,12 +45,12 @@ class EnqueueFormBuilderScripts
     {
         wp_enqueue_script('givewp-form-extension-activecampaign', $this->scriptSrc, $this->scriptAsset['dependencies']);
         wp_localize_script('givewp-form-extension-activecampaign', 'GiveActiveCampaign', [
-            'requiresSetup' => !$this->activecampaign->credentials_test(),
-            'settingsUrl'   =>  admin_url('edit.php?post_type=give_forms&page=give-settings&tab=activecampaign'),
-            'lists' =>  $this->getLists(),
-            'tags'  => $this->getTags(),
+            'requiresSetup' => ! $this->activecampaign->credentials_test(),
+            'settingsUrl'   => admin_url('edit.php?post_type=give_forms&page=give-settings&tab=activecampaign'),
+            'lists'         => $this->getLists(),
+            'tags'          => $this->getTags(),
         ]);
-        
+
         wp_enqueue_style('givewp-form-extension-active-campaign', $this->styleSrc);
     }
 
@@ -61,19 +61,19 @@ class EnqueueFormBuilderScripts
     {
         if ($this->activecampaign->credentials_test()) {
             $lists = (array)$this->activecampaign->api('list/list', ['ids' => 'all']);
-            
+
             $lists = array_filter($lists, function ($list) {
                 return $list->name;
             });
-            
+
             return array_map(function ($list) {
-                return ['value' => $list->id, 'label' => $list->name];
+                return ['id' => $list->id, 'name' => $list->name];
             }, $lists);
         }
-        
+
         return [];
     }
-    
+
     /**
      * @unreleased
      */
@@ -81,11 +81,12 @@ class EnqueueFormBuilderScripts
     {
         if ($this->activecampaign->credentials_test()) {
             $tags = json_decode($this->activecampaign->api('tags/list', ['ids' => 'all']));
+
             return array_map(function ($tag) {
                 return ['value' => $tag->name, 'label' => $tag->name];
             }, $tags);
         }
-        
+
         return [];
     }
 }
