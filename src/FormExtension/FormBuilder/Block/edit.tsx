@@ -1,69 +1,89 @@
-import {__} from '@wordpress/i18n';
-import {BlockEditProps} from '@wordpress/blocks';
-import {InspectorControls} from '@wordpress/block-editor';
-import {PanelBody, CheckboxControl, SelectControl, TextControl, ToggleControl} from '@wordpress/components';
+import { __ } from '@wordpress/i18n';
+import { BlockEditProps } from '@wordpress/blocks';
+import { InspectorControls } from '@wordpress/block-editor';
+import {
+  PanelBody,
+  SelectControl,
+  TextControl,
+  ToggleControl,
+} from "@wordpress/components";
+import BlockPlaceholder from "./BlockPlaceholder";
+import { getWindowData } from "./window";
+import { BlockNotice } from "@givewp/form-builder-library";
 
-declare const window: {
-    GiveActiveCampaign: {
-            lists?: Array<{ id: string; name: string }>,
-            tags?: Array<{ id: string; name: string }>
-        }
-} & Window
-
-const listOptions = window.GiveActiveCampaign.lists;
-const tagOptions = window.GiveActiveCampaign.tags;
+const { lists, tags } = getWindowData();
 
 /**
  * @unreleased
  */
-export default function Edit({attributes, setAttributes}: BlockEditProps<any>) {
-    const {defaultChecked, label, selectedLists, selectedTags} = attributes;
-    // @ts-ignore
-    return (
-        <>
-            <div className={'givewp-activecampaign-block-placeholder'}>
-                <CheckboxControl checked={defaultChecked} label={label} onChange={null} disabled={true} />
+export default function Edit({
+  attributes,
+  setAttributes,
+}: BlockEditProps<any>) {
+  const { defaultChecked, label, selectedLists, selectedTags } = attributes;
+  const { settingsUrl, requiresSetup } = getWindowData();
+
+  return (
+    <>
+      <BlockPlaceholder {...{ defaultChecked, label }} />
+      <InspectorControls>
+        <PanelBody
+          title={__('Field Settings', 'give-activecampaign')}
+          initialOpen={true}
+        >
+          {requiresSetup ? (
+            <BlockNotice
+              title={__('ActiveCampaign requires setup', 'give')}
+              description={__(
+                'This block requires your settings to be configured in order to use.',
+                'give'
+              )}
+              anchorText={__('Connect your ActiveCampaign account', 'give')}
+              href={settingsUrl}
+            />
+          ) : (
+            <div className={'givewp-activecampaign-controls'}>
+              <TextControl
+                label={__('Custom Label', 'give-activecampaign')}
+                value={label}
+                help={__(
+                  'Customize the label for the ActiveCampaign opt-in checkbox',
+                  'give-activecampaign'
+                )}
+                onChange={(value) => setAttributes({ label: value })}
+              />
+
+              <ToggleControl
+                label={__('Opt-in Default', 'give-activecampaign')}
+                checked={defaultChecked}
+                onChange={() =>
+                  setAttributes({ defaultChecked: !defaultChecked })
+                }
+                help={__(
+                  'Customize the newsletter opt-in option for this form.',
+                  'give-activecampaign'
+                )}
+              />
+
+              <SelectControl
+                multiple={true}
+                label={__('Lists', 'give-activecampaign')}
+                value={selectedLists}
+                onChange={(value) => setAttributes({ selectedLists: value })}
+                options={lists}
+              />
+
+              <SelectControl
+                multiple={true}
+                label={__('Tags', 'give-activecampaign')}
+                value={selectedTags}
+                onChange={(value) => setAttributes({ selectedTags: value })}
+                options={tags}
+              />
             </div>
-            <InspectorControls>
-                <PanelBody title={__('Field Settings', 'give-activecampaign')} initialOpen={true}>
-                    <div className={'givewp-activecampaign-controls'}>
-                        <TextControl
-                            label={__('Custom Label', 'give-activecampaign')}
-                            value={label}
-                            help={__('Customize the label for the ActiveCampaign opt-in checkbox', 'give-activecampaign')}
-                            onChange={(value) => setAttributes({label: value})}
-                        />
-
-                        <ToggleControl
-                            label={__('Opt-in Default', 'give-activecampaign')}
-                            checked={defaultChecked}
-                            onChange={() => setAttributes({defaultChecked: !defaultChecked})}
-                            help={__(
-                                'Customize the newsletter opt-in option for this form.',
-                                'give-activecampaign'
-                            )}
-                        />
-
-                        <SelectControl
-                            multiple={true}
-                            label={__('Lists', 'give-activecampaign')}
-                            value={selectedLists}
-                            onChange={(value) => setAttributes({selectedLists: value})}
-                            // @ts-ignore
-                            options={listOptions}
-                        />
-
-                        <SelectControl
-                            multiple={true}
-                            label={__('Tags', 'give-activecampaign')}
-                            value={selectedTags}
-                            onChange={(value) => setAttributes({selectedTags: value})}
-                            // @ts-ignore
-                            options={tagOptions}
-                        />
-                    </div>
-                </PanelBody>
-            </InspectorControls>
-        </>
-    );
+          )}
+        </PanelBody>
+      </InspectorControls>
+    </>
+  );
 }
