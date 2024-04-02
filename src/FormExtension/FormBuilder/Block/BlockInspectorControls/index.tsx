@@ -55,7 +55,7 @@ export default function BlockInspectorControls({ attributes, setAttributes }) {
             <ListsControl
               id={"givewp-activecampaign-tag-controls"}
               onChange={(values) =>
-                setAttributes({ selectedEmailLists: values })
+                setAttributes({ selectedLists: values })
               }
               lists={lists}
               selectedLists={selectedLists}
