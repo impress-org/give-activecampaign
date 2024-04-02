@@ -6,14 +6,14 @@ const { checkbox: Checkbox } = window.givewp.form.templates.fields;
 /**
  * @unreleased
  */
-export default function FieldTemplate({ErrorMessage, label, defaultChecked, inputProps}) {
+export default function FieldTemplate({ErrorMessage, label, checked, inputProps}) {
     return (
         <div className={'givewp-activecampaign-field'}>
             <Checkbox
                 Label={() => label}
                 ErrorMessage={ErrorMessage}
                 inputProps={{
-                    defaultChecked: defaultChecked,
+                    defaultChecked: checked,
                     ...inputProps,
                 }}
             />
