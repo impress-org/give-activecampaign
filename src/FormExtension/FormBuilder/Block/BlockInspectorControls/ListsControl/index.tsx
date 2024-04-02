@@ -51,7 +51,7 @@ export default function ListsControl({
               "give-activecampaign"
             )
       }
-      label={__("default opt-in", "give-activecampaign")}
+      label={__("List opt-in", "give-activecampaign")}
     >
       {lists &&
         lists?.map(({ id, name }) => (
