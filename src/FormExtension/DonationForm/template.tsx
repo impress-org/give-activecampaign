@@ -19,3 +19,4 @@ export default function FieldTemplate({ErrorMessage, label, defaultChecked, inpu
             />
         </div>
     );
+}
