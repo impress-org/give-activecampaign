@@ -67,7 +67,7 @@ export default function BlockInspectorControls({ attributes, setAttributes }) {
                 "These tags will be applied to Subscribers based on the form they used to sign up.",
                 "give-activecampaign"
               )}
-              label={__("Subscriber Tags", "give-mailchimp")}
+              label={__("Subscriber Tags", "give-activecampaign")}
               onChange={(tag) => setAttributes({ selectedTags: tag })}
               tagOptions={tags}
               selectedTags={selectedTags}
