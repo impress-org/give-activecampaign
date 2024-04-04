@@ -59,7 +59,7 @@ class AddBlockToNewForms
      */
     protected function getSelectedLists()
     {
-        return give_get_option('give_activecampaign_lists');
+        return give_get_option('give_activecampaign_lists', []);
     }
 
     /**
