@@ -1,13 +1,10 @@
-import {BaseControl, CheckboxControl} from "@wordpress/components";
-import {__} from "@wordpress/i18n";
-import {Fragment, useState} from "react";
-import {lists} from "../../window";
+import { BaseControl, CheckboxControl } from "@wordpress/components";
+import { __ } from "@wordpress/i18n";
+import { Fragment, useEffect } from "react";
+import { lists } from "../../window";
 
 import "./styles.scss";
 
-/**
- * @unreleased
- */
 type ListControlProps = {
   id: string;
   onChange: (values: string[]) => void;
@@ -17,23 +14,33 @@ type ListControlProps = {
 
 type selectedLists = string[];
 
-/**
- * @unreleased
- **/
 export default function ListsControl({
   id,
   onChange,
   lists,
   selectedLists,
 }: ListControlProps) {
-  const handleListSelection = (isChecked: boolean, id: string) => {
-    if (isChecked) {
-      const addListName = [...selectedLists, id];
-      onChange(addListName);
-    } else {
-      const removeListName = selectedLists.filter((list) => list !== id);
-      onChange(removeListName);
+  useEffect(() => {
+    if (selectedLists.length === 0 && lists.length > 0) {
+      const minListsRequired = [lists[0].id];
+      onChange(minListsRequired);
     }
+  }, [selectedLists, lists]);
+
+  const handleListSelection = (isChecked: boolean, id: string) => {
+    let updatedList: string[];
+    if (isChecked) {
+      updatedList = [...selectedLists, id];
+    } else {
+      updatedList = selectedLists.filter((list) => list !== id);
+    }
+
+    // Ensure at least one checkbox is checked
+    if (updatedList.length === 0 && lists.length > 0) {
+      updatedList.push(lists[0].id);
+    }
+
+    onChange(updatedList);
   };
 
   return (
@@ -54,12 +61,12 @@ export default function ListsControl({
       label={__("List opt-in", "give-activecampaign")}
     >
       {lists &&
-        lists?.map(({ id, name }) => (
+        lists.map(({ id, name }) => (
           <Fragment key={id}>
             <ListCheckboxControl
               id={id}
               name={name}
-              checked={selectedLists && selectedLists.includes(id)}
+              checked={selectedLists.includes(id)}
               handleListSelection={handleListSelection}
             />
           </Fragment>
@@ -68,9 +75,6 @@ export default function ListsControl({
   );
 }
 
-/**
- * @unreleased
- **/
 type ListCheckboxProps = {
   id: string;
   name: string;
@@ -78,26 +82,19 @@ type ListCheckboxProps = {
   handleListSelection: (isChecked: boolean, id: string) => void;
 };
 
-/**
- * @unreleased
- **/
 function ListCheckboxControl({
   name,
   id,
   checked,
   handleListSelection,
 }: ListCheckboxProps) {
-  const [isChecked, setIsChecked] = useState<boolean>(null);
-
   const handleChange = () => {
-    handleListSelection(!isChecked, id);
-    setIsChecked(!isChecked);
+    handleListSelection(!checked, id);
   };
 
   return (
     <CheckboxControl
-      defaultChecked={checked}
-      checked={isChecked}
+      checked={checked}
       id={id}
       label={name}
       onChange={handleChange}
