@@ -57,7 +57,10 @@ export default function TagControls({
       <ReactSelect
         isMulti
         name={"subscriptionTagListControl"}
-        placeholder={__("Add subscription tags to this form")}
+        placeholder={__(
+          "Add subscription tags to this form",
+          "give-activecampaign"
+        )}
         value={filteredValues}
         options={tagOptions}
         onChange={handleChange}

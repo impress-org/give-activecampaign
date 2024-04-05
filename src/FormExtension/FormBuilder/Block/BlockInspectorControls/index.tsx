@@ -20,12 +20,15 @@ export default function BlockInspectorControls({ attributes, setAttributes }) {
       >
         {requiresSetup ? (
           <BlockNotice
-            title={__("ActiveCampaign requires setup", "give")}
+            title={__("ActiveCampaign requires setup", "give-activecampaign")}
             description={__(
               "This block requires your settings to be configured in order to use.",
-              "give"
+              "give-activecampaign"
             )}
-            anchorText={__("Connect your ActiveCampaign account", "give")}
+            anchorText={__(
+              "Connect your ActiveCampaign account",
+              "give-activecampaign"
+            )}
             href={settingsUrl}
           />
         ) : (
@@ -54,9 +57,7 @@ export default function BlockInspectorControls({ attributes, setAttributes }) {
 
             <ListsControl
               id={"givewp-activecampaign-tag-controls"}
-              onChange={(values) =>
-                setAttributes({ selectedLists: values })
-              }
+              onChange={(values) => setAttributes({ selectedLists: values })}
               lists={lists}
               selectedLists={selectedLists}
             />
