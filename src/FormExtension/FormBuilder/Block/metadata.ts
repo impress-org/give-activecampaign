@@ -18,7 +18,7 @@ const metadata: BlockConfiguration = {
     attributes: {
         label: {
             type: 'string',
-            default: __('Subscribe to newsletter?', 'give'),
+            default: __('Subscribe to our newsletter?', 'give'),
         },
         defaultChecked: {
             type: 'boolean',
