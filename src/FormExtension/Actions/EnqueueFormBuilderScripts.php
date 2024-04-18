@@ -59,19 +59,19 @@ class EnqueueFormBuilderScripts
      */
     protected function getLists(): array
     {
-        if ($this->activecampaign->credentials_test()) {
-            $lists = (array)$this->activecampaign->api('list/list', ['ids' => 'all']);
-
-            $lists = array_filter($lists, function ($list) {
-                return $list->name;
-            });
-
-            return array_map(function ($list) {
-                return ['id' => $list->id, 'name' => $list->name];
-            }, $lists);
+        if (!$this->activecampaign->credentials_test()) {
+            return [];
         }
 
-        return [];
+        $lists = (array)$this->activecampaign->api('list/list', ['ids' => 'all']);
+
+        $lists = array_filter($lists, function ($list) {
+            return $list->name;
+        });
+
+        return array_map(function ($list) {
+            return ['id' => $list->id, 'name' => $list->name];
+        }, $lists);
     }
 
     /**
@@ -79,14 +79,14 @@ class EnqueueFormBuilderScripts
      */
     protected function getTags(): array
     {
-        if ($this->activecampaign->credentials_test()) {
-            $tags = json_decode($this->activecampaign->api('tags/list', ['ids' => 'all']));
-
-            return array_map(function ($tag) {
-                return ['value' => $tag->name, 'label' => $tag->name];
-            }, $tags);
+        if (!$this->activecampaign->credentials_test()) {
+            return [];
         }
 
-        return [];
+        $tags = json_decode($this->activecampaign->api('tags/list', ['ids' => 'all']));
+
+        return array_map(function ($tag) {
+            return ['value' => $tag->name, 'label' => $tag->name];
+        }, $tags);
     }
 }
