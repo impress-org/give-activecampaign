@@ -17,7 +17,7 @@ class AddBlockToNewForms
     {
         $activeCampaign = give(\ActiveCampaign::class);
 
-        if (!($this->isEnabledGlobally() && $activeCampaign->credentials_test())) {
+        if (!$this->isEnabledGlobally() || !$activeCampaign->credentials_test()) {
             return;
         }
 
