@@ -16,18 +16,20 @@ class AddBlockToNewForms
     public function __invoke(DonationForm $form)
     {
         $activeCampaign = give(\ActiveCampaign::class);
-        
-        if ($this->isEnabledGlobally() && $activeCampaign->credentials_test()) {
-            $form->blocks->insertAfter('givewp/email', BlockModel::make([
-                'name' => 'give-activecampaign/activecampaign',
-                'attributes' => [
-                    'label' => $this->getLabel(),
-                    'defaultChecked' => $this->getDefaultChecked(),
-                    'selectedLists' => $this->getSelectedLists(),
-                    'selectedTags' => $this->getSelectedTags(),
-                ],
-            ]));
+
+        if (!$this->isEnabledGlobally() && !$activeCampaign->credentials_test()) {
+            return;
         }
+
+        $form->blocks->insertAfter('givewp/email', BlockModel::make([
+            'name'       => 'give-activecampaign/activecampaign',
+            'attributes' => [
+                'label'          => $this->getLabel(),
+                'defaultChecked' => $this->getDefaultChecked(),
+                'selectedLists'  => $this->getSelectedLists(),
+                'selectedTags'   => $this->getSelectedTags(),
+            ],
+        ]));
     }
 
     /**
