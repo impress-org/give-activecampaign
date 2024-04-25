@@ -284,7 +284,7 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 					'file'              => GIVE_ACTIVECAMPAIGN_FILE,
 					'name'              => esc_html__( 'ActiveCampaign', 'give-activecampaign' ),
 					'version'           => GIVE_ACTIVECAMPAIGN_VERSION,
-					'settings_url'      => admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=give-activecampaign&section=activecampaign-settings' ),
+					'settings_url'      => admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=activecampaign' ),
 					'documentation_url' => 'http://docs.givewp.com/addon-activecampaign',
 					'support_url'       => 'https://givewp.com/support/',
 					'testing'           => false, // Never leave true.
