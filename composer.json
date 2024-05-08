@@ -2,17 +2,26 @@
   "name": "impress-org/give-activecampaign",
   "type": "wordpress-plugin",
   "scripts": {
-    "unreleased": "./vendor/bin/since-unreleased.sh"
+    "unreleased": "./vendor/bin/since-unreleased.sh",
+    "test": "./vendor/bin/phpunit"
   },
   "require": {
     "activecampaign/api-php": "2.0.3"
   },
   "require-dev": {
-    "kjohnson/since-unreleased": "^1.0"
+    "roave/security-advisories": "dev-latest"
+    ,
+    "kjohnson/since-unreleased": "^1.0",
+    "phpunit/phpunit": "^5.7"
   },
   "autoload": {
     "psr-4": {
       "GiveActiveCampaign\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "GiveActiveCampaign\\Tests\\": "tests/"
     }
   },
   "config": {

@@ -6,12 +6,12 @@ use Give\DonationForms\Models\DonationForm;
 use Give\Framework\Blocks\BlockModel;
 
 /**
- * @unreleased
+ * @since 2.0.0
  */
 class AddBlockToNewForms
 {
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     public function __invoke(DonationForm $form)
     {
@@ -33,7 +33,7 @@ class AddBlockToNewForms
     }
 
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     public function isEnabledGlobally(): bool
     {
@@ -41,7 +41,7 @@ class AddBlockToNewForms
     }
 
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     public function getLabel(): string
     {
@@ -49,7 +49,7 @@ class AddBlockToNewForms
     }
 
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     protected function getDefaultChecked()
     {
@@ -57,7 +57,7 @@ class AddBlockToNewForms
     }
 
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     protected function getSelectedLists()
     {
@@ -65,7 +65,7 @@ class AddBlockToNewForms
     }
 
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     protected function getSelectedTags()
     {

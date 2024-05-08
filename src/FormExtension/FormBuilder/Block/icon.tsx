@@ -3,7 +3,7 @@ import {Path, SVG} from '@wordpress/components';
 /**
  * ActiveCampaign "Blue Mark"
  * @link https://www.activecampaign.com/about/newsroom/branding
- * @unreleased
+ * @since 2.0.0
  */
 const Icon = (
     <SVG fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="121.47 91.37 83.78 123.27">

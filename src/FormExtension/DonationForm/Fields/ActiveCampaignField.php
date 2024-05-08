@@ -5,24 +5,24 @@ namespace GiveActiveCampaign\FormExtension\DonationForm\Fields;
 use Give\Framework\FieldsAPI\Checkbox;
 
 /**
- * @unreleased
+ * @since 2.0.0
  */
 class ActiveCampaignField extends Checkbox
 {
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     protected $selectedLists = [];
 
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     protected $selectedTags = [];
 
     public const TYPE = 'activecampaign';
 
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     public function selectedLists(array $selectedLists): ActiveCampaignField
     {
@@ -31,14 +31,14 @@ class ActiveCampaignField extends Checkbox
     }
 
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     public function getSelectedLists(): array
     {
         return $this->selectedLists;
     }
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     public function selectedTags(array $selectedTags): ActiveCampaignField
     {
@@ -47,7 +47,7 @@ class ActiveCampaignField extends Checkbox
     }
 
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     public function getSelectedTags(): array
     {

@@ -10,25 +10,25 @@ class EnqueueFormBuilderScripts
     protected $activecampaign;
 
     /**
-     * @unreleased
+     * @since 2.0.0
      * @var string
      */
     protected $styleSrc;
 
     /**
-     * @unreleased
+     * @since 2.0.0
      * @var string
      */
     protected $scriptSrc;
 
     /**
-     * @unreleased
+     * @since 2.0.0
      * @var array
      */
     protected $scriptAsset;
 
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     public function __construct(\ActiveCampaign $activecampaign)
     {
@@ -39,7 +39,7 @@ class EnqueueFormBuilderScripts
     }
 
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     public function __invoke()
     {
@@ -55,7 +55,7 @@ class EnqueueFormBuilderScripts
     }
 
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     protected function getLists(): array
     {
@@ -75,7 +75,7 @@ class EnqueueFormBuilderScripts
     }
 
     /**
-     * @unreleased
+     * @since 2.0.0
      */
     protected function getTags(): array
     {

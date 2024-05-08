@@ -5,7 +5,9 @@
  * Description: Easily display an ActiveCampaign opt-in option within your donation forms.
  * Author: GiveWP
  * Author URI: https://givewp.com/
- * Version: 1.0.1
+ * Version: 2.0.0
+ * Requires PHP: 7.2
+ * Requires at least: 6.3
  * Text Domain: give-activecampaign
  * Domain Path: languages
  */
@@ -17,10 +19,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Plugin constants.
 if ( ! defined( 'GIVE_ACTIVECAMPAIGN_VERSION' ) ) {
-	define( 'GIVE_ACTIVECAMPAIGN_VERSION', '1.0.1' );
+	define( 'GIVE_ACTIVECAMPAIGN_VERSION', '2.0.0' );
 }
 if ( ! defined( 'GIVE_ACTIVECAMPAIGN_MIN_GIVE_VER' ) ) {
-	define( 'GIVE_ACTIVECAMPAIGN_MIN_GIVE_VER', '2.7.0' );
+	define( 'GIVE_ACTIVECAMPAIGN_MIN_GIVE_VER', '3.11.0' );
 }
 if ( ! defined( 'GIVE_ACTIVECAMPAIGN_FILE' ) ) {
 	define( 'GIVE_ACTIVECAMPAIGN_FILE', __FILE__ );
@@ -65,7 +67,7 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 		public $notices = array();
 
         /**
-         * @unreleased
+         * @since 2.0.0
          * @var array
          */
         private $serviceProviders = [
@@ -115,7 +117,7 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
         /**
          * Register service providers
          *
-         * @unreleased
+         * @since 2.0.0
          */
         public function registerServiceProviders()
         {
