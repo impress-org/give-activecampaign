@@ -431,9 +431,8 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 					"email"      => $user_info['email'],
 					"first_name" => $user_info['first_name'],
 					"last_name"  => $user_info['last_name'],
+                    "tags"       => implode( ', ', (array)$tags ),
 				];
-
-                is_array($tags) && $subscriber["tags" ] = implode( ', ', $tags );
 
 				foreach ( $lists as $list ) {
 					$subscriber["p[$list]"] = $list;
