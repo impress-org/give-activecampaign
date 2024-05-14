@@ -431,7 +431,7 @@ if ( ! class_exists( 'Give_ActiveCampaign' ) ) {
 					"email"      => $user_info['email'],
 					"first_name" => $user_info['first_name'],
 					"last_name"  => $user_info['last_name'],
-					"tags"       => implode( ', ', $tags ),
+                    "tags"       => implode( ', ', (array)$tags ),
 				];
 
 				foreach ( $lists as $list ) {
